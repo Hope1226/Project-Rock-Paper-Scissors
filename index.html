@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <link href="https://fonts.googleapis.com/css2?family=Lato&family=Lobster&family=Montserrat&family=Open+Sans&family=Oswald&family=Roboto&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap" rel="stylesheet"> 
+      <title>Rock,Paper and Scissors</title>
+   <style>
+       body { background-color: white;
+              background-image: url(images.png);}
+              
+       h1 {
+           font-family:'Lobster', cursive;
+           color: rgb(201, 86, 40);
+           text-align: center;
+           }
+
+        .mainDiv {
+            background-color: rgb(255, 255, 255);
+            border: 1px grey;
+            color: rgb(65, 64, 64);
+            padding: 100px 200px 100px 200px;
+            margin: 10px 200px 10px 200px;
+            text-align: center;
+            border-style: solid;
+            border-radius: 16px;
+        }
+        .headDiv {
+            padding: 10px 20px;
+        }
+
+        .buttons {
+            border-style: solid;
+            border-radius: 16px;
+            border-width: 0px;
+            padding: 10px 24px;
+            background-color:rgb(201, 86, 40);
+            color: aliceblue;
+            font-family: 'Oswald', sans-serif;
+        }
+        .buttons:hover {
+            background-color:rgb(187, 107, 70); 
+            cursor: pointer;
+            box-shadow: black;
+            transform: scale(1.1);
+        }
+
+   </style>
+  </head>
+  <body>
+      <div class="mainDiv">
+        <div class="headDiv"><h1>Game Rock Paper Scissors</h1>
+         </div>
+          <div>
+           <button class="buttons" type="button" onclick="javascript: playRound('Rock', computerPlay())">Rock</button>
+           <button class="buttons" type="button" onclick="javascript: playRound('Paper', computerPlay())">Paper</button>
+           <button class="buttons" type="button" onclick="javascript: playRound('Scissors', computerPlay())">Scissors</button>
+           <p id="pcMove">Let's rock! Make a choice! first to get 5 points wins the game!</p>
+           <p id="result"></p>
+           <p id="pcScore">PC's score: 0</p>
+           <p id="plScore">Player's score: 0</p>
+         </div>
+     </div>
+
+ </body>
+ <script>
+     const para=document.querySelector('#result');
+     const pcMove=document.querySelector('#pcMove');
+     const pcScore=document.querySelector('#pcScore');
+     const plScore=document.querySelector('#plScore');
+     
+     let computerScore= 0;
+     let playerScore= 0;
+
+ 
+    function computerPlay(){
+        const possibleMoves = ['Rock','Paper','Scissors'];
+    computerMove = possibleMoves[Math.round(Math.random()*(possibleMoves.length-1))];
+    return computerMove;
+    }
+
+    function playRound(playerSelection,computerSelection){
+
+        switch(true){
+            case playerSelection === 'Paper' && computerSelection === 'Rock':
+            case playerSelection ==='Scissors' && computerSelection === 'Paper':
+            case playerSelection ==='Rock' && computerSelection === 'Scissors':
+            para.textContent = 'You win! ' + playerSelection +' beats ' +computerSelection;
+            pcMove.textContent = 'PC\'s move is: '+computerSelection;
+            plScore.textContent = 'Player\'s score: ' + playerScore++;
+            pcScore.textContent= 'PC\'s score ' + computerScore;
+            game();
+            doReset ()
+            break;
+            case playerSelection === 'Rock' && computerSelection === 'Paper':
+            case playerSelection === 'Paper' && computerSelection=== 'Scissors':
+            case playerSelection === 'Scissors' && computerSelection === 'Rock':
+            para.textContent = 'You lost! ' + computerSelection+' beats ' +playerSelection;
+            pcMove.textContent = 'PC\'s move is: '+computerSelection;
+            plScore.textContent = 'Player\'s score: ' + playerScore;
+            pcScore.textContent= 'PC\'s score ' + computerScore++;
+            game();
+            doReset ()
+            break
+            case playerSelection === computerSelection:
+            para.textContent = 'It is raw, no one wins';
+            pcMove.textContent = 'PC\'s move is: '+computerSelection;
+            plScore.textContent = 'Player\'s score: ' + playerScore;
+            pcScore.textContent= 'PC\'s score ' + computerScore;
+            game();
+            doReset ()
+            break;
+            
+        
+            
+        }
+
+
+        }
+
+        function game(){
+            if (computerScore == 5 && playerScore > 5){
+                alert('Ooops....You lost the game!')
+
+            }
+            else if(computerScore > 5 && playerScore == 5){
+                alert('Congrats....You won the game!')
+            }
+            else if(computerScore > playerScore && computerScore+playerScore == 5){
+                alert('Ooops....You lost the game! try again!!')
+            }
+            else if (computerScore < playerScore && computerScore+playerScore == 5 ){
+
+                alert('Congrats....You won the game! try again!!')
+
+
+
+        }
+
+        
+
+
+        }
+        function doReset (){
+            if(computerScore+playerScore == 5){
+            para.textContent = ' ';
+            pcMove.textContent = 'Let\'s rock! Make a choice! first to get 5 points wins the game!';
+            playerScore = 0;
+            computerScore = 0;
+
+            }
+
+
+        }
+        
+
+
+        
+
+    
+
+</script>
+</html>
